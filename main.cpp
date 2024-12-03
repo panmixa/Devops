@@ -2,12 +2,15 @@
 #include "FuncA.h"
 
 int main() {
-    // Create an instance of the FuncA class
     FuncA func;
 
-    // Call the calculate method and print the result
-    std::cout << "FuncA result: " << func.calculate() << std::endl;
+    // Example: Calculate sh(x) for x=2.0 using the first 5 terms
+    double x = 2.0;
+    int n = 5;
+    std::cout << "sh(" << x << ") using the first " << n << " terms: " 
+              << func.calculate(x, n) << std::endl;
 
     return 0;
 }
+
 
