@@ -1,9 +1,12 @@
-name: Build and Create Debian Package
+name: Build and Link Binary
 
 on:
   push:
     branches:
-      - branchAutoPackage
+      - branchMake
+  pull_request:
+    branches:
+      - branchMake
 
 jobs:
   build:
@@ -13,14 +16,12 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v3
 
-    - name: Install build tools
+    - name: Set up C++ environment
+      uses: actions/setup-python@v2
+
+    - name: Build project using Makefile
       run: |
         sudo apt-get update
-        sudo apt-get install devscripts dpkg-dev automake autoconf -y
-
-    - name: Build Debian Package
-      run: |
-        ./configure
-        make dist
-        dpkg-buildpackage -us -uc
+        sudo apt-get install build-essential -y
+        make
 
